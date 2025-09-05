@@ -77,7 +77,7 @@ public class StarbucksBad {
     public static void main(String[] args) {
         boolean yes = false;
 
-         double total = calcTotal("GRANDE", yes, "STUDENT10", "15");
+         double total = calcTotal("GRANDE", yes, "STUDENT10", "10");
         System.out.println("Total = $" + total);
     }
 }
