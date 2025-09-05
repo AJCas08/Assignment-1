@@ -26,19 +26,23 @@ public class StarbucksBad {
             
             total += calcAddons(milk, shots, syrupPumps, addWhip);
         }
-
-        if (studentCode != null && studentCode.indexOf("STUDENT") >= 0) {
-            total -= (total * 0.1); // magic discount
+        
+        if (studentCode != null && studentCode.contains("STUDENT")) {
+            //Student Discount
+            total -= (total * 0.1); 
         }
         
         //Adds Tax
         total += (total * 0.0825);
 
+        //Cleaned up tip
         if (tip != null) {
             try {
                 int tp = Integer.parseInt(tip);
-                total = total + (total * (tp / 100));
-            } catch (Exception e) { }
+                total *= 1 + (tp / 100);
+
+            } catch (Exception e) {  }
+
         }
 
 
@@ -72,7 +76,8 @@ public class StarbucksBad {
 
     public static void main(String[] args) {
         boolean yes = false;
-         double total = calcTotal("GRANDE", yes, "STUDENT10", "10");
+
+         double total = calcTotal("GRANDE", yes, "STUDENT10", "15");
         System.out.println("Total = $" + total);
     }
 }
