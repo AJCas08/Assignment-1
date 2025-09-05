@@ -12,19 +12,43 @@ public class StarbucksBad {
 
         //Lets user decide to customize coffee or stick with default
         if(customizeOptions){
-            System.out.println("Choose milk: Type WHOLE, OAT, or ALMOND");
-            String milk = scanner.nextLine();
+            boolean finished = false;
+            while(!finished){
+                System.out.println("Choose milk: Type WHOLE, OAT, or ALMOND");
+                String milk = scanner.nextLine();
+                if(!(milk.equalsIgnoreCase("whole") || milk.equalsIgnoreCase("oat") || milk.equalsIgnoreCase("almond"))){
+                    System.err.println("Invalid selection for milk, please try again");
+                }
+                else{
+                    try{
+                        boolean addingWhip = false;
+                        while(true){
+                            System.out.println("Add whip? true/false");
+                            String addWhip = scanner.nextLine();
+                            if(!(addWhip.equalsIgnoreCase("true") || addWhip.equalsIgnoreCase("false"))){
+                                System.err.println("Invalid selection for whip, please try again");
+                            }
+                            else{
+                                addingWhip = Boolean.parseBoolean(addWhip);
+                                break;
+                            }
+                        }
 
-            System.out.println("Add whip? yes/no");
-            String addWhip = scanner.nextLine();
-
-            System.out.println("Enter digit for shot amount");
-            int shots = scanner.nextInt(); 
-
-            System.out.println("Enter digit for syrup pumps");
-            int syrupPumps = scanner.nextInt();  
+                        System.out.println("Enter digit for shot amount");
+                        int shots = Integer.parseInt(scanner.nextLine()); 
             
-            total += calcAddons(milk, shots, syrupPumps, addWhip);
+                        System.out.println("Enter digit for syrup pumps");
+                        int syrupPumps = Integer.parseInt(scanner.nextLine());  
+                        
+                        total += calcAddons(milk, shots, syrupPumps, addingWhip);
+                        finished = true;
+                    }
+                    catch(Exception e){
+                        System.err.println("Exception thrown: "+e);
+                        System.out.println("Please Try again");
+                    }
+                }
+            }
         }
         
         if (studentCode != null && studentCode.contains("STUDENT")) {
@@ -50,7 +74,7 @@ public class StarbucksBad {
         return Math.round(total * 100.0) / 100.0;
     }
     //Helper function to help calculate total of addons. Removes bulk params from calc total and speeds up process.
-    public static double calcAddons(String milk, int shots, int syrupPumps, String whip){
+    public static double calcAddons(String milk, int shots, int syrupPumps, boolean whip){
         double addonTotal = 0.0;
 
         if (milk.equals("OAT")){
@@ -67,7 +91,7 @@ public class StarbucksBad {
             addonTotal += 0.5;
         }
 
-        if (whip != null && whip.equals("yes")) { 
+        if (whip) { 
             addonTotal += 0.3; 
         }
 
@@ -75,9 +99,9 @@ public class StarbucksBad {
     }
 
     public static void main(String[] args) {
-        boolean yes = false;
+        boolean options = true;
 
-         double total = calcTotal("GRANDE", yes, "STUDENT10", "10");
+         double total = calcTotal("GRANDE", options, "STUDENT10", "10");
         System.out.println("Total = $" + total);
     }
 }
