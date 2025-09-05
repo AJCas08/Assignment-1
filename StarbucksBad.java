@@ -99,9 +99,39 @@ public class StarbucksBad {
     }
 
     public static void main(String[] args) {
-        boolean options = true;
-
-         double total = calcTotal("GRANDE", options, "STUDENT10", "10");
+        double total = 0;
+        //Base Cases (No Discounts or Customizations)
+        total = calcTotal("TALL", false, null, "0");
+        System.out.println("Total = $" + total);
+        total = calcTotal("VENTI", false, null, "0");
+        System.out.println("Total = $" + total);
+        total = calcTotal("GRANDE", false, null, "0");
+        System.out.println("Total = $" + total);
+        
+        //Discount Cases
+        total = calcTotal("TALL", false, "STUDENT123", "0");
+        System.out.println("Total = $" + total);
+        total = calcTotal("VENTI", false, "STudentCode", "0");
+        System.out.println("Total = $" + total);
+        total = calcTotal("GRANDE", false, "NOTASTUDENT", "0");
+        System.out.println("Total = $" + total);
+        
+        //Tip Cases
+        total = calcTotal("TALL", false, null, "10");
+        System.out.println("Total = $" + total);
+        total = calcTotal("VENTI", false, null, "20");
+        System.out.println("Total = $" + total);
+        total = calcTotal("TALL", false, null, "notanumber");
+        System.out.println("Total = $" + total);
+        
+        //Combined Cases (Discounts and Tips)
+        total = calcTotal("VENTI", false, "STUDENT10", "15");
+        System.out.println("Total = $" + total);
+        
+        //Edge and Error Cases
+        total = calcTotal(null, false, null, "0");
+        System.out.println("Total = $" + total);
+        total = calcTotal("SMALL", false, null, "0");
         System.out.println("Total = $" + total);
     }
 }
