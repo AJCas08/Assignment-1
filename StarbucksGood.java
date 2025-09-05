@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class StarbucksBad {
+public class StarbucksGood {
     // Calculates total for a drink with many options
     public static double calcTotal(String size, boolean customizeOptions, String studentCode, String tip) {
         double total = 0;
