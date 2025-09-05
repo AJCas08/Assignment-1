@@ -75,9 +75,28 @@ public class StarbucksBad {
     }
 
     public static void main(String[] args) {
-        boolean yes = false;
+        System.out.println("Test 1: Tall, no options, no discount, no tip");
+        System.out.println(StarbucksBad.calcTotal("TALL", false, null, null)); 
+        // expected ≈ 2.71
 
-         double total = calcTotal("GRANDE", yes, "STUDENT10", "10");
-        System.out.println("Total = $" + total);
+        System.out.println("Test 2: Venti with student discount");
+        System.out.println(StarbucksBad.calcTotal("VENTI", false, "STUDENT123", null)); 
+        // expected ≈ 3.65
+
+        System.out.println("Test 3: Grande with 20% tip");
+        System.out.println(StarbucksBad.calcTotal("GRANDE", false, null, "20")); 
+        // expected ≈ 4.22
+
+        System.out.println("Test 4: Addons directly");
+        System.out.println(StarbucksBad.calcAddons("OAT", 2, 3, "yes")); 
+        // expected 4.9
+
+        System.out.println("Test 5: Invalid tip ignored");
+        System.out.println(StarbucksBad.calcTotal("TALL", false, null, "abc")); 
+        // expected ≈ 2.71
+
+        System.out.println("Test 6: Student code without number (still gives discount in your version)");
+        System.out.println(StarbucksBad.calcTotal("VENTI", false, "STUDENT", null)); 
+        // expected ≈ 3.65
     }
 }
